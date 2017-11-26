@@ -1,0 +1,139 @@
+body {
+	text-align : left;
+}
+
+#navicon {
+	
+	font-size: 25px;
+}
+.blanc {
+	background-color: white;
+	
+}
+
+header {
+
+	background-color: rgb(18,70,95);
+	height: 100%;
+	text-align: center;
+	font-family: Arial;
+	margin-bottom: 50px;
+
+}
+
+
+img {
+
+	margin : 20px;
+	border-radius: 2px;
+	width: 15%;
+}
+#titreSite {
+
+	display: inline-block;
+	margin : 20px;
+	font-size: 50px;
+	color: white;
+	font-family: 'Century Gothic', 'Candara', 'Calibri', Arial;
+	
+}
+
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: gray;
+    font-style : italic;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    gray;
+   font-style : italic;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: gray;
+   font-style : italic;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: gray;
+   font-style : italic;
+}
+#ods {
+	
+	width: 95%;
+}
+.statA {
+	background-color : green;
+}
+.statI {
+	background-color : red;
+}
+.statA, .statI, .statD {
+	
+	font-weight: bold;
+	color: white;
+
+}
+.statD {
+	background-color : rgb(201,151,33);
+
+}
+.fp {
+	background-color : rgba(200,200,200,0.8);
+	color: black;
+
+}
+.divise {
+	
+	background-color : rgb(0,64,128);
+
+	color: white;	
+}
+th {
+	
+	color: rgb(0,69,138);
+	
+}
+tr {
+
+	text-align: left;
+	
+}
+.actcol {
+	
+	color : gray;
+
+}
+.act, .actcol {
+	border-right:3px solid gray;
+}
+.creerbtn {
+	margin-left: 15px;
+	padding: 8px;
+}
+.tailletab {
+	
+	width: 40%;
+	margin: 0 auto;
+	
+}
+#navbar {
+
+	bottom: 0;
+	color : black;
+	border: 1px solid rgb(172,188,242);
+	font-size : 16px;
+}
+
+section {
+	
+	width: 95%;
+	margin: 0 auto;
+}
+#texte {
+	
+	font-size : 20px;
+}
+
+li {
+	list-style : none;
+}

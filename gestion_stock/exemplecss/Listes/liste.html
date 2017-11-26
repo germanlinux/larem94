@@ -1,0 +1,214 @@
+
+<div data-ng-controller="MainController" data-ng-init="afficheTable()">
+	
+	<button class="btn btn-info" onClick="history.back()"><i class="fa fa-chevron-left" aria-hidden="true"></i> Retour &agrave; la page pr&eacute;c&eacute;dente</button>
+	
+<!-------------
+----filtres----
+--------------->
+		
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h3 class="panel-title">Filtrer par tables : </h3>
+		</div>
+		
+		<div class="panel-body">
+		
+			<div class="form-inline">
+			
+			<!-- Filtre figHTAB -->
+
+				<div class="checkbox checkbox-default">
+					<input 
+						id="ftab"
+						class="styled"
+						type="checkbox"
+						data-ng-model='figHTAB.X' 
+					/>
+					<label for="ftab">
+						Figurant dans HTAB
+					</label>
+				</div>
+				<div class="checkbox checkbox-default">
+					<input 
+						id="nonftab"
+						class="styled"
+						type="checkbox"
+						data-ng-model='figHTAB.non' 
+					/>
+					<label for="nonftab">
+						Ne figurant pas dans HTAB
+					</label>
+				</div>
+
+			<!-- Filtre Commentaire -->
+			
+				<div class="checkbox checkbox-danger">
+					<input 
+						id="obso"
+						class="styled"
+						type="checkbox"
+						data-ng-model='statut.obsolete' 
+					/>
+					<label for="obso">
+						Obsol&egrave;tes
+					</label>
+				</div>
+				<div class="checkbox checkbox-success">
+					<input 
+						id="util"
+						class="styled"
+						type="checkbox"
+						data-ng-model='statut.utilisee' 
+					/>
+					<label for="util">
+						Utilis&eacute;es
+					</label>
+				</div>
+				
+				<!-- Filtre programme-->
+				
+				<div class="checkbox checkbox-warning">
+					<input 
+						id="progr"
+						class="styled"
+						type="checkbox"
+						data-ng-model='programme.ok' 
+					/>
+					<label for="progr">
+						Li&eacute;es &agrave; un programme
+					</label>
+				</div>
+				
+				<div class="checkbox checkbox-warning">
+					<input 
+						id="nprogr"
+						class="styled"
+						type="checkbox"
+						data-ng-model='programme.pasOk' 
+					/>
+					<label for="nprogr">
+						Non li&eacute;es &agrave; un programme
+					</label>
+				</div>
+				
+				<!-- Filtre Grille -->
+				
+				<div class="checkbox checkbox-info">
+					<input 
+						id="gri"
+						class="styled"
+						type="checkbox"
+						data-ng-model='grille.ok' 
+					/>
+					<label for="gri">
+						Ayant une grille
+					</label>
+				</div>
+				<div class="checkbox checkbox-info">
+					<input 
+						id="ngri"
+						class="styled"
+						type="checkbox"
+						data-ng-model='grille.pasOk' 
+					/>
+					<label for="ngri">
+						Ne poss&eacute;dant pas de grille
+					</label>
+				</div>
+
+			</div>
+		</div>		
+	</div>
+	
+	<div class="table-responsive">
+		<table class="table">
+		
+			<tr>
+			
+				<th><span ng-click="sortType='mnemonique'; sortReverse = !sortReverse">
+					Mn&eacute;monique
+				<span ng-show="sortType == 'mnemonique' && !sortReverse" class="fa fa-caret-down"></span>
+	        	<span ng-show="sortType == 'mnemonique' && sortReverse" class="fa fa-caret-up"></span>
+				</span></th>
+				<th><span ng-click="sortType='libelleFichierCPTABL'; sortReverse = !sortReverse">
+					Libell&eacute; fichier CPTABL
+				<span ng-show="sortType == 'libelleFichierCPTABL' && !sortReverse" class="fa fa-caret-down"></span>
+	        	<span ng-show="sortType == 'libelleFichierCPTABL' && sortReverse" class="fa fa-caret-up"></span>
+				</span></th>
+				<th><span ng-click="sortType='autreLibelle'; sortReverse = !sortReverse">
+					Autre libell&eacute;
+				<span ng-show="sortType == 'autreLibelle' && !sortReverse" class="fa fa-caret-down"></span>
+	        	<span ng-show="sortType == 'autreLibelle' && sortReverse" class="fa fa-caret-up"></span>
+	        	</span></th>
+				<th><span ng-click="sortType='figurantDansHTAB'; sortReverse = !sortReverse">
+					Figurant dans HTAB
+				<span ng-show="sortType == 'figurantDansHTAB' && !sortReverse" class="fa fa-caret-down"></span>
+	        	<span ng-show="sortType == 'figurantDansHTAB' && sortReverse" class="fa fa-caret-up"></span>
+	        	</span></th>
+				<th><span ng-click="sortType='commentaire'; sortReverse = !sortReverse">
+					Commentaire
+				<span ng-show="sortType == 'commentaire' && !sortReverse" class="fa fa-caret-down"></span>
+	        	<span ng-show="sortType == 'commentaire' && sortReverse" class="fa fa-caret-up"></span>
+	        	</span></th>
+				<th><span ng-click="sortType='programmeTransaction'; sortReverse = !sortReverse">
+					Programme transaction
+				<span ng-show="sortType == 'programmeTransaction' && !sortReverse" class="fa fa-caret-down"></span>
+	        	<span ng-show="sortType == 'programmeTransaction' && sortReverse" class="fa fa-caret-up"></span>
+				</span></th>
+				<th><span ng-click="sortType='grille'; sortReverse = !sortReverse">
+					Grille
+				<span ng-show="sortType == 'grille' && !sortReverse" class="fa fa-caret-down"></span>
+	        	<span ng-show="sortType == 'grille' && sortReverse" class="fa fa-caret-up"></span>
+				</span></th>
+				
+			</tr>
+			
+			<tr ng-repeat="t in tables | orderBy:sortType:sortReverse | filtreStatut:statut | filtreHTAB:figHTAB | filtreGrille:grille | filtreProg:programme">
+			
+				<td ng-model="nomFiche">
+					
+					<span ng-show="t.mnemonique != '/'">
+						<a href="#/detailsTable/{{t.mnemonique}}">{{t.mnemonique}}</a>
+					
+					</span>
+				</td>
+						
+				<td>
+					<span ng-show="t.libelleFichierCPTABL != '/'">
+						{{t.libelleFichierCPTABL}}
+					</span>
+				</td>
+				
+				<td>
+					<span ng-show="t.autreLibelle != '/'">
+						{{t.autreLibelle}}
+					</span>
+				</td>
+				<td>
+					<span ng-show="t.figurantDansHTAB != '/'">
+						{{t.figurantDansHTAB}}
+					</span>
+				</td>
+				<td>
+					<span ng-model="tri" ng-show="t.commentaire != '/'">
+						{{t.commentaire}}
+					</span>
+				</td>
+				<td>
+					<span ng-show="t.programmeTransaction != '/'">
+						{{t.programmeTransaction}}
+					</span>
+				</td>
+				<td>
+					<span ng-show="t.grille != '/'">
+						<a href="/grilles/{{t.mnemonique | lowercase}}.png">{{t.grille}}</a>
+					</span>
+				</td>
+				
+			</tr>
+	
+		</table>
+	</div>
+</div>
+
