@@ -1,0 +1,189 @@
+<% include partial_hdp %>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Liste des Comités </h1>
+                </div>
+
+
+
+
+
+
+                      <!-- /.col-lg-12 -->
+            </div>
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h3>T10</h3>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Comité
+                                            </th>
+                                            <th>
+                                                Dépot
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                     <% t1.forEach(function(i1) { %>
+                                        <tr>
+                                            <td><%= i1.libelle%></td>
+                                            <td><%= i1.id_depot %></td>
+                                        </tr>
+                                      <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h3>T10.1</h3>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Comité
+                                            </th>
+                                            <th>
+                                                Dépot
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                     <% t2.forEach(function(i1) { %>
+                                        <tr>
+                                            <td><%= i1.libelle%></td>
+                                            <td><%= i1.id_depot %></td>
+                                        </tr>
+                                      <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h3>T11</h3>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Comité
+                                            </th>
+                                            <th>
+                                                Dépot
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                     <% t3.forEach(function(i1) { %>
+                                        <tr>
+                                            <td><%= i1.libelle%></td>
+                                            <td><%= i1.id_depot %></td>
+                                        </tr>
+                                      <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h3>T12</h3>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Comité
+                                            </th>
+                                            <th>
+                                                Dépot
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                     <% t4.forEach(function(i1) { %>
+                                        <tr>
+                                            <td><%= i1.libelle%></td>
+                                            <td><%= i1.id_depot %></td>
+                                        </tr>
+                                      <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <h3>T13</h3>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Comité
+                                            </th>
+                                            <th>
+                                                Dépot
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                     <% t5.forEach(function(i1) { %>
+                                        <tr>
+                                            <td><%= i1.libelle%></td>
+                                            <td><%= i1.id_depot %></td>
+                                        </tr>
+                                      <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="../vendor/raphael/raphael.min.js"></script>
+    <script src="../vendor/morrisjs/morris.min.js"></script>
+    <script src="../data/morris-data.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
+</body>
+
+</html>

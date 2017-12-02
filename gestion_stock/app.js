@@ -5,10 +5,25 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
+var depot = require('./routes/depots');
 var users = require('./routes/users');
-
+var db  =require('./db');
 var app = express();
+// code germanlinux
+//var pgp = require("pg-promise")(/*options*/);
+//var db= pgp("postgres://larem94:larem94@192.168.99.100:5432/stock94")
+//console.log("connection)")
+db.connect(function(){console.log('eric')
+  });
+db.get().one("SELECT  hub from hubs;")
+  .then(function(data){
+      console.log("connexion base ok");
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,7 +37,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use('/', depot);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
