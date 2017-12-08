@@ -2,7 +2,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Tableau de bord du <%= manchette %> </h1>
+                    <h3 class="page-header">Les dépots </h3>
                 </div>
 
 
@@ -13,32 +13,15 @@
                       <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+
             <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-info fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge"><%= nbproduit %> </div>
-                                    <div>produit<% if (nbproduit > 1) { %>s <% } %> en Depot</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
+            <div class="col-lg-16">
+             <div class="panel panel-green">
+                <div class="panel-heading">
+                            <h4> Le Dépôt départemental</h4>
                 </div>
-            </div>
-            <div class="row">
-                <% datas.forEach(function(data) { %>
+             </div>
+                <% general.forEach(function(data) { %>
 
                 <div class="col-lg-6 col-md-6">
                     <div class="panel <%= data.couleur%>">
@@ -61,12 +44,69 @@
                             </div>
                         </a>
                     </div>
-               </div> <% }); %>
+                </div> <% }); %>
             </div>
-        </div>
+        </div> <!-- row -->
+        <% var tdep = Object.keys(depot).sort() %>
+        <% for(var i=0; i< tdep.length; i++) {%>
+        <div class="row">
+            <div class="col-lg-16">
+             <div class="panel panel-success">
+                <div class="panel-heading">
+                            <h4> <%= tdep[i] %> </h4>
+                </div>
+             </div>
+            </div>
+              <% liste = depot[tdep[i]]  %>
+              <% liste.forEach(function(data) { %>
+              <% var nomp = produit[data.id_produit].nom %>
+              <% var couleurp = produit[data.id_produit].couleur %>
+              <% var famille = produit[data.id_produit].libelle %>
+              <% var nb =  data.sum %>
+
+                <div class="col-lg-6 col-md-6">
+                    <div class="panel <%= couleurp%>">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-map-o fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"><%=  nb %></div>
+                                    <div><%= nomp %> ( <%= famille %>)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div> <% }); %>
+
+
+
+
+
+        </div> <!-- row -->
+        <% } %>
+
+
+
+
+
+
+
+
+
+
+
         <!-- /#page-wrapper -->
 
- 
+    </div>
     <!-- /#wrapper -->
 
     <!-- jQuery -->

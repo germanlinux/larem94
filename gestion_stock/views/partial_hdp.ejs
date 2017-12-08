@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" href="images/favicon-16x16.png" />
+    <link rel="icon" type="image/png" href="/images/favicon-16x16.png" />
     <title><%= title %></title>
 
     <!-- Bootstrap Core CSS -->
@@ -22,6 +22,8 @@
 
     <!-- Morris Charts CSS -->
     <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+    <link href="/stylesheets/jquery-ui.css" rel="stylesheet">
+
 
     <!-- Custom Fonts -->
     <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -52,7 +54,7 @@
             </div>
             <div class="container">
                 <div class="pull-right">
-                <img src="images/larem94.jpg" class="img-rounded" alt="larem94" width="100" height="80">
+                <img src="/images/larem94.jpg" class="img-rounded" alt="larem94" width="100" height="80">
             </div>
             </div>
             <!-- /.navbar-header -->
@@ -65,21 +67,21 @@
                     <ul class="nav" id="side-menu">
 
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="/index.html"><i class="fa fa-dashboard fa-fw"></i> Synthèse</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-table fa-fw"></i>Parametres<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Les produits</a>
+                                    <a href="/produit_list">Les produits</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Les familles de produit</a>
+                                    <a href="famille_list">Les familles de produit</a>
                                 </li><li>
                                     <a href="/depot_liste">Les dépots</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Les comités</a>
+                                    <a href="/comite_liste">Les comités</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -88,13 +90,13 @@
                             <a href="tables.html"><i class="fa fa-shopping-cart fa-fw"></i> Opérations du dépôt principal<span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Entrée d'un produit</a>
+                                    <a href="/depot/entree">Entrée d'un produit</a>
                                 </li>
                                 <li>
-                                    <a href="flot.html">Sortie d'un produit vers un dépôt secondaire</a>
+                                    <a href="/depot/sortie">Sortie d'un produit vers un dépôt secondaire</a>
                                 </li>
                                 <li>
-                                    <a href="flot.html">Le stock</a>
+                                    <a href="/depot/recap">Etat des stocks en dépot</a>
                                 </li>
                          </ul>
                         </li>
@@ -102,7 +104,7 @@
                          <a href="tables.html"><i class="fa fa-shopping-basket  fa-fw"></i> Distribution aux comités<span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Approvisionnement d'un comité</a>
+                                    <a href="/depot/">Approvisionnement d'un comité</a>
                                 </li>
                                 <li>
                                     <a href="flot.html">Statistiques comités</a>
@@ -110,78 +112,10 @@
                          </ul>
                         </li>
 
-                        <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="panels-wells.html">Panels and Wells</a>
-                                </li>
-                                <li>
-                                    <a href="buttons.html">Buttons</a>
-                                </li>
-                                <li>
-                                    <a href="notifications.html">Notifications</a>
-                                </li>
-                                <li>
-                                    <a href="typography.html">Typography</a>
-                                </li>
-                                <li>
-                                    <a href="icons.html"> Icons</a>
-                                </li>
-                                <li>
-                                    <a href="grid.html">Grid</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Second Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Third Level <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level Item</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="blank.html">Blank Page</a>
-                                </li>
-                                <li>
-                                    <a href="login.html">Login Page</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->
-        </nav>
+</div>
