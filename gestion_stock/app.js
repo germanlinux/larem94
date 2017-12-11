@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var basicAuth = require('express-basic-auth');
 var depot = require('./routes/depots');
 var users = require('./routes/users');
 var db  =require('./db');
@@ -23,7 +23,13 @@ db.get().one("SELECT  hub from hubs;")
     console.log(error);
   })
 
+app.use(basicAuth({
+    users: {
+    },
+    challenge: true,
+    realm: 'Imb4T3st4pp'
 
+}))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
