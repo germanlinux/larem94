@@ -5,19 +5,22 @@
 import json
 import sys
 import re
-argv_file= sys.argv[1]
-argv_comite94 =  sys.argv[2]
+import requests
+#argv_file= sys.argv[1]
+argv_comite94 =  sys.argv[1]
 hash_com ={}
-with open(argv_file,"r") as f:
-    lignes = f.readlines()
-tab= json.loads(lignes[0] )
+r = requests.get('https://en-marche.fr/api/events')
+content_page=r.content
+#with open(argv_file,"r") as f:
+#    lignes = f.readlines()
+tab= json.loads(content_page )
 with open(argv_comite94,"r",encoding='windows-1252') as f:
     comites = f.readlines()
 for item in comites:
      item= item[0:-1]
      tabl = item.split(';')
      tabl[0] = tabl[0].replace("'","")
-     hash_com[tabl[0]] = 0
+     hash_com[tabl[1]] = 0
 #print(hash_com)
 for a in tab:
      #print(a)
