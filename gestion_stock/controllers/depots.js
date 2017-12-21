@@ -3,6 +3,25 @@ var path = require('path');
 var scriptName = path.basename(__filename);
 db = require('../db')
 
+function  helper_resoudre_produit(produits,depots) {
+   let tab_produit = produits;
+   let ta_lignes = depots;
+   my_hash = {};
+   my_hashdep = {}
+   for (var i=0; i < tab_produit.length;i++) {
+       my_hash[tab_produit[i].id_produit] = tab_produit[i];
+   }
+   console.log('e',my_hash);
+   console.log(ta_lignes)
+   let myprod = []
+   for (var i=0; i < ta_lignes.length;i++) {
+                ta_lignes[i]['detail']=my_hash[ta_lignes[i].id_produit].nom ;
+                myprod[i] =ta_lignes[i];
+               // myprod.push(ta_lignes[i].nom );
+       }
+   console.log('cartedep',myprod);
+   return myprod;
+};
 function  helper_agrege(produits,depots) {
    let tab_produit = produits;
    let ta_lignes = depots;
@@ -24,6 +43,32 @@ function  helper_agrege(produits,depots) {
    console.log(Object.keys(my_hashdep))
    return[my_hashdep,my_hash];
 };
+exports.dotation_projet = function(req, res) {
+ db.connect(function(){console.log('connection base depuis:',scriptName)
+  });
+ let ligne     = req.body.ligne;
+ let quantite  = req.body.quantite;
+ let madate    = req.body.date;
+ let  depot =0;
+ let produit = 0;
+ [depot, produit]  = ligne.split('#');
+ db.get().task(t => {
+    const q1 = t.one("select libelle from produits where id_produit = $1",produit);
+    const q2 = t.any("select * from comites where id_depot = $1", depot);
+    return t.batch([q1,q2])
+ .then(data => {
+     let strproduit= data[0];
+     let comites = data[1];
+    // console.log("ere",comites);
+     comites= JSON.stringify(comites);
+   //  console.log(comites);
+     res.render('dotationdetail', { title: 'Gerer une dotation' , depot: depot, produit: strproduit.libelle, quantite:quantite, comites: comites,id_produit: produit});
+   })
+
+ })
+
+};
+
 exports.depot_recap = function(req, res) {
  db.connect(function(){console.log('connection base depuis:',scriptName)
   });
@@ -34,14 +79,38 @@ exports.depot_recap = function(req, res) {
     .then(data => {
                let general = data[0];
                [detail,libel] = helper_agrege(data[0],data[1]);
+
                res.render('depotrecap', { title: 'Les dépots de laREM94' , general: general,depot: detail, produit: libel});
     })
     })
 .catch(error => {
         console.log(error);
     });
+}
+exports.dotation = function(req, res) {
+  var madate = new Date();
+  var jour=madate.getDate();
+  var mois=madate.getMonth()+1;
+  var an=madate.getFullYear();
+  strdate =an+ '-' + mois + '-' + jour
+db.connect(function(){console.log('connection base depuis:',scriptName)
+  });
+db.get().task(t => {
+  const q3 = t.any("select id_produit, produits.libelle as nom , stock , familles.libelle, couleur from produits inner join familles on famille  = id_famille where stock > 0 order by id_produit;"   ) ;
+  const q2 = t.any("select  id_produit,id_depot, SUM(quantite) from mouvement_depot   where  TYPE = 'SORTIE'group by id_depot,id_produit order by id_depot ;");
+  return t.batch([q3,q2])
+.then(data => {
+               let general = data[0];
 
-
+               detail = helper_resoudre_produit(data[0],data[1]);
+                console.log('eg', detail);
+/*                console.log('eg2', libel); */
+               res.render('dotation', { title: 'Dotations des dépots' , general: general, depot: detail, date: strdate});
+    })
+    })
+.catch(error => {
+        console.log(error);
+    });
 }
 exports.depot_maj = function(req, res) {
  db.connect(function(){console.log('connection base depuis:',scriptName)

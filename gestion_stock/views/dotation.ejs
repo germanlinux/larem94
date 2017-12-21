@@ -1,0 +1,76 @@
+<% include partial_hdp %>
+
+<div id="page-wrapper">
+                      <!-- /.col-lg-12 -->
+        <div class="row">
+            <div class="col-lg-12">
+                    <h1 class="page-header">Dotation d'un dépot secondaire</h1>
+           </div>
+        </div>
+        <% if (depot == undefined) {   console.log('eric',depot.length) ; %>
+        <div  class="panel panel-red">
+        <div class="panel-heading">
+                            Erreur: Aucun produit a distribuer dans un dépot secondaire
+
+        </div>
+        </div>
+        <% }  else { %>
+        <div class="row">
+         <form role="form" METHOD="POST">
+            <div class="col-lg-12">
+                    <h4 class="page-header">Dotation globale des comités d'un dépot </h4>
+           </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-4">
+                    <div class="form-group">
+                      <label>Liste des produits à ventiler</label>
+                      <select name="ligne" class="form-control">
+                   <!--    <% var tdep = Object.keys(depot).sort()%>  -->
+                        <% for(var i=0; i< depot.length; i++) {%>
+                           <option value="<%= depot[i].id_depot +'#' + depot[i].id_produit  %>"><%= depot[i].id_depot%> -><%=depot[i].detail  %> (<%= depot[i].sum%> ) </option>
+                       <% } %>
+                      </select>
+                    </div>
+            </div>
+             <div class="col-lg-2">
+                    <div class="form-group">
+                      <label>Quantite</label>
+                      <input  class type='form-control' name="quantite" value="0"  />
+                    </div>
+            </div>
+            <div class="col-lg-2">
+                    <div class="form-group">
+                      <label>Date</label>
+                      <input  class type='form-control' name="date" value="<%= date %>" />
+                    </div>
+            </div>
+         </div>
+            <div class="row">
+                    <div class="col-lg-3">&nbsp;
+                    </div>
+                    <div class="col-lg-6">
+                        <button type="submit" class="btn btn-default">Lancer une dotation</button>
+                    </div>
+
+            </form>
+
+
+
+        </div> <!-- fin row -->
+
+
+
+<% } %>
+</div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+   <% include pied %>
+
+
+</body>
+
+</html>
