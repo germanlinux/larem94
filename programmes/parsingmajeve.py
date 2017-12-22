@@ -20,7 +20,7 @@ for item in comites:
      item= item[0:-1]
      tabl = item.split(';')
      tabl[0] = tabl[0].replace("'","")
-     hash_com[tabl[1]] = 0
+     hash_com[tabl[1]] = tabl[0]
 #print(hash_com)
 for a in tab:
      #print(a)
@@ -30,9 +30,12 @@ for a in tab:
          nom = lib[1]
          if nom in hash_com:
             mydate = a['slug'][0:10]
+            ident = a['uuid']
             motif  = a['name']
-            hash_com[nom] += 1
-            print("{};{};{}".format(mydate,nom,motif))
+            comit = hash_com[nom]
+            print("{};{};{};{};{}".format(ident,mydate,nom,motif, comit))
+            print("INSERT INTO evenements (id_evenement, id_comite, dateevenement, libelle)  VALUES ('{}', '{}', '{}', '{}');".format(\
+            ident, comit, mydate, motif))
 #for item in hash_com:
 #    if hash_com[item] > 0:
 #         print("{} --> {}".format(item,hash_com[item]))
