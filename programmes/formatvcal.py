@@ -16,12 +16,12 @@ for item in lignes:
    tab= item.split(';')
    print('BEGIN:VEVENT')
    print('CATEGORIES:MEETING')
-   mydate = tab[0]
+   mydate = tab[1]
    fordate = re.match(r"(\d\d\d\d)-(\d\d)-(\d\d)",mydate)
    stabledate = fordate[1] + fordate[2] + fordate[3]
    print("DTSTART:",stabledate)
-   print("SUMMARY:",tab[1])
-   print("DESCRIPTION:",tab[2])
+   print("SUMMARY:",tab[2])
+   print("DESCRIPTION:",tab[3])
    print("END:VEVENT")
 
 print("END:VCALENDAR")
