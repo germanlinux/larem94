@@ -4,50 +4,7 @@ var scriptName = path.basename(__filename);
 db = require('../db');
 
 // SEPARATEUR
-exports.dotation= function(req, res){
 
-  var madate = new Date();
-  var jour=madate.getDate();
-  var mois=madate.getMonth()+1;
-  var an=madate.getFullYear();
-  strdate =an+ '-' + mois + '-' + jour
-  db.connect(function(){console.log('connection base depuis:',scriptName)
-    });
-  console.log('body',req.body);
-  // recup des parametes
-  // niveau dotation
-  //
-  let depot = req.body._depot;
-  let produit = Number(req.body._id_produit);
-  let dotation = Number(req.body._dotation);
-  let total  = Number(req.body._total);
-  console.log(depot, produit, dotation, total,strdate );
-  // creation dotation
-  db.get().one("INSERT INTO dotations (depot, produit, datedotation, quantite_initiale, quantite_reservee) VALUES ($1, $2, $3, $4, $5) RETURNING id_dotation",[depot, produit,strdate, dotation, total] )
-    .then((data)=> {
-      console.log('id', data.id_dotation);
-      // insert pour chacun des comites
-       let tabcomite =[];
-       let tabkeys = Object.keys(req.body);
-       console.log('er',tabkeys);
-       db.get().task(t => {
-         for(i=0; i < tabkeys.length;i++){
-           if(tabkeys[i][0] != '_') {
-             let comite = tabkeys[i];
-             let quantite = Number(req.body[tabkeys[i]]);
-             tabcomite.push(db.get().none("INSERT INTO repartitions (dotation, depot, produit, datedotation, quantite_initiale, comite)  \
-             Values ($1,$2,$3, $4, $5, $6)",[data.id_dotation, depot, produit, strdate, quantite, comite]  ));
-           }
-          }
-        return t.batch(tabcomite)
-       .then(() => {
-          console.log('OK');
-          res.send("e---------------g");
-       })
-       })
-     })
-
-}
 exports.update = function(req, res){
     db.connect(function(){console.log('connection base depuis:',scriptName)
     });
@@ -62,7 +19,6 @@ exports.update = function(req, res){
         console.log(error);
     })
     };
-
 
 
 // SEPARATEUR

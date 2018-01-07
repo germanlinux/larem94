@@ -1,0 +1,83 @@
+<% include partial_hdp %>
+
+<script type= "application/json" id="mydata">
+            <%= lignes  %>
+            </script>
+ <div id="page-wrapper" >
+<div id="app">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Dotation des comités du dépot: {{depot}}</h1>
+                </div>
+            </div>
+            <div class="row">
+               <div class="col-lg-16">
+                <div class="panel panel-green">
+                   
+                   <div class="panel-heading" >
+                       <h4>Depot secondaire:<span class="text-danger"> {{depot}} </span>  pour le produit:<span class="text-danger"> {{libelle}}</span><p class="text-right">  Feuille d'emmargement</h4>
+                   </div>
+                </div>
+               </div>
+           <!-- /#row -->
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default" >
+                        <div class="panel-heading">
+                            Les comites du dépôt
+                        </div>
+                        <div class="panel-body">
+                            <!--  boucle comites -->
+                            <div class="row" >
+                                <div class="col-lg-6">
+                                        
+                                   <div class="table-responsive" >
+                                      <table class="table table-striped table-bordered">
+                                         <thead>
+                                             <tr>
+                                                 <th>
+                                                     Comité
+                                                 </th>
+                                                 <th>
+                                                     Quantite à retirer
+                                                 </th>
+                                                 <th>
+                                                     Etat  
+                                                 </th>
+                                                 
+                                             </tr>
+                                         </thead>
+                                        
+                                       <tbody >
+                                           <thead is="ligne_emmargement"  :ligne="ligne"  v-for="ligne in lignes" :sendm="onChildMsg"></thead>
+                                        </tbody>   
+                                       </table>
+                                       
+                                    
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+             </div>
+             ERIC   {{param1}}
+<form id="formulaire" method="POST" >
+ <input type="hidden" name= "_comite"  :value= param1 /> 
+ <input type="hidden" name= "_quantite"  :value=quant1 /> 
+ <input type="hidden" name="_depot" :value=depot  />
+ <input type="hidden" name="_prd" :value=prd  />
+    
+</form>                        
+    </div>
+</div>
+</div>
+    
+ <% include pied %>
+</body>
+<script src="/javascripts/vue.js" ></script>
+<script src="/javascripts/eglarem94dotation.js" ></script>
+</html>
