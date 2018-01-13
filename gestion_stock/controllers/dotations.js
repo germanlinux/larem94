@@ -6,20 +6,55 @@ db = require('../db');
 // SEPARATEUR
 
 //get rservation
+//liste dotation
+exports.dotationlist= function(req,res) {
+ db.get().any("select id_dotation,depot, produits.libelle, familles.libelle as famille, to_char(datedotation,'DD/MM/YYYY') as datedotation,quantite_initiale from dotations join produits on produit= id_produit join  familles on produits.famille= id_famille")
+ .then(data =>{
+    res.render('dotationlistes', { title: 'Dotations'  ,lignes:data   });
+ })
+ .catch(error => {
+         console.log(error);
+ });
+
+}
+
 exports.a_retirer = function(req, res){
- let dotation = req.params.id;
+ let dotation = Number(req.params.id);
+ let comite = req.body._comite;
+ let depot = req.body._depot;
+ let quantite = Number(req.body._quantite);
+ let produit = Number(req.body._prd);
+ let id_ligne =  Number(req.body._ligne);
+ //maj des depots
+ //maj du produit
+ let madate = db.get_date();
+
+ db.get().task(t => {
+      const q1 = db.get().none('INSERT into mouvement_comite (datemvt,type, quantite, id_produit, id_depot, id_comite) VALUES($1, $2, $3, $4, $5, $6)', [madate, 'SORTIE', quantite, produit, depot,comite ]);
+      const q2 = db.get().none("update produits set stock = stock - $2 where id_produit= $1",[produit,quantite] );
+      const q3 = db.get().none("update repartitions set dateretrait = $1, quantite_retiree = $2, quantite_initiale = $2  where id_repartition= $3",[madate,quantite,id_ligne] );
+      return t.batch([q1,q2,q3])
+    .then(() => {
+       res.redirect("/une_dotation/"+ dotation);
+    })
+    .catch(error => {
+        console.log(error);
+    })
+    });
+
+
 // console.log('eg',dotation);
  console.log('body',req.body);
 
 
- res.send('erg');
+
 }
 exports.reservation =  function(req, res){
  db.connect(function(){console.log('connection base depuis:',scriptName)
     });
  let mydate = db.get_date();
  let dotation = req.params.id;
- db.get().any("select depot, quantite_initiale , quantite_retiree,datedotation, id_produit, comites.libelle as comite_lib,comite, dateretrait, produits.libelle from repartitions join  produits \
+ db.get().any("select id_repartition, depot, quantite_initiale , quantite_retiree,datedotation, id_produit, comites.libelle as comite_lib,comite, dateretrait, produits.libelle from repartitions join  produits \
  on produit= id_produit  join comites on comite= id_comite  where dotation= $1;",[dotation])
  .then(data =>{
       let strlignes = JSON.stringify(data);

@@ -1,9 +1,11 @@
 <% include partial_hdp %>
-       
+  
         <script type= "application/json" id="mydata">
             <%= comites  %>
             </script>
-        <div id="app"> 
+<div id="page-wrapper">
+
+        <div id="app">
             <div class="row">
                 <div class="col-lg-12">
                     <h3 class="page-header">Produit à ventiler </h3>
@@ -15,7 +17,7 @@
             <div class="row">
                <div class="col-lg-16">
                 <div class="panel panel-green">
-                   
+
                    <div class="panel-heading" >
                        <h4>Depot secondaire:<span class="text-danger"> <%= depot %> </span>  pour le produit:<span class="text-danger"> <%= produit%></span><p class="text-right"> Total:  {{somme}}  / <%= quantite %></p> </h4>
                    </div>
@@ -40,7 +42,7 @@
                                      <input type="hidden" name="_depot" value="<%= depot%>" />
                                      <input type="hidden" name="_dotation" value="<%= quantite%>" />
                                      <input type="hidden" name="_id_produit" value="<%= id_produit%>" />
-                                     <input type="hidden" name="_total" :value=somme />    
+                                     <input type="hidden" name="_total" :value=somme />
 
     <!-- /#wrapper -->
           <div class="table-responsive" >
@@ -55,11 +57,11 @@
                     </th>
                 </tr>
             </thead>
-           
+
           <tbody >
              <thead is="comite"  :comite="comite"  v-for="comite in comites"></thead>
                        </tbody>
-                  
+
             </table>
             Total:{{somme}}
            </div>
@@ -68,9 +70,9 @@
                     </div>
                     <div class="col-lg-6">
                         <button type="submit" class="btn btn-default">Enregistrer</button>
-                    </div>                        
+                    </div>
             </form>
-                                     
+
                                 </div>
                             </div>
                         </div>
