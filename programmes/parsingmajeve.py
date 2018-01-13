@@ -32,10 +32,11 @@ for a in tab:
             mydate = a['slug'][0:10]
             ident = a['uuid']
             motif  = a['name']
+            motifclean = motif.replace('\'', '\'\'')
             comit = hash_com[nom]
             print("{};{};{};{};{}".format(ident,mydate,nom,motif, comit))
             print("INSERT INTO evenements (id_evenement, id_comite, dateevenement, libelle)  VALUES ('{}', '{}', '{}', '{}');".format(\
-            ident, comit, mydate, motif))
+            ident, comit, mydate, motifclean))
 #for item in hash_com:
 #    if hash_com[item] > 0:
 #         print("{} --> {}".format(item,hash_com[item]))
