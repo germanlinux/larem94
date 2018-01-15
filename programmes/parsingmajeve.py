@@ -1,5 +1,5 @@
-# parsing du fichier evenement recuperé avec l'API en marche
-# à partir de la liste des commutes du 94 , vérifier l intitulé du comitev et l'URL
+# parsing du fichier evenement recupere avec l'API en marche
+# a partir de la liste des commutes du 94 , verifier l intitule du comitev et l'URL
 #Sous licence GPL2
 #By @germanlinux LaREM94
 import json
@@ -30,11 +30,16 @@ for a in tab:
          nom = lib[1]
          if nom in hash_com:
             mydate = a['slug'][0:10]
+            aaa = mydate[0:4]
+            mm = mydate[5:7]
+            jj = mydate[8:]
+            strdate=jj + '/' + mm + '/' + aaa
             ident = a['uuid']
             motif  = a['name']
             motifclean = motif.replace('\'', '\'\'')
             comit = hash_com[nom]
-            print("{};{};{};{};{}".format(ident,mydate,nom,motif, comit))
+            print("{}:{} => {}\n".format(strdate,nom,motif))
+            print("CAL;{};{};{}".format(mydate,nom,motif))
             print("INSERT INTO evenements (id_evenement, id_comite, dateevenement, libelle)  VALUES ('{}', '{}', '{}', '{}');".format(\
             ident, comit, mydate, motifclean))
 #for item in hash_com:
