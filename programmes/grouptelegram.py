@@ -1,15 +1,17 @@
 from telethon import TelegramClient
+import re
+#MessageService(out=False, mentioned=False, media_unread=False, silent=False, post=False, id=247, from_id=190483374, to_id=PeerChannel(channel_id=1227208803), reply_to_msg_id=None, date=datetime.utcfromtimestamp(1514887801), action=MessageActionChatJoinedByLink(inviter_id=324578789))
 
 # Use your own values here
-api_id = 156792
-api_hash = 'XXXXXX'
-phone_number = '+33XXXXXX'
+api_id = xxxxxxx
+api_hash = 'xxxxxxxxxxxxxx'
+phone_number = '+XXXXXXXXXXX'
 
 client = TelegramClient('postman', api_id, api_hash)
 client.connect()
 #print(client.is_user_authorized())
 #client.send_code_request(phone_number)
-#myself = client.sign_in(phone_number,'XXXXX' )
+#myself = client.sign_in(phone_number,'49226' )
 #print(client.is_user_authorized())
 #from telethon.tl.functions.contacts import ResolveUsernameRequest
 #result = client(ResolveUsernameRequest('jeanenmarche'))
@@ -24,13 +26,19 @@ myself = client.get_me()
 total, messages, senders = client.get_message_history('GERMANLINUX')
 #print( str(messages))
 
-dialogs, entities = client.get_dialogs(10)
-entity = entities[8]
+dialogs, entities = client.get_dialogs(40)
+for item in entities:
+  if hasattr(item, 'title'):
+     #print(item.title)
+     if re.search('Boite',item.title):
+        if  hasattr(item, 'megagroup'):
+            entity  = item
+#entity = entities[39]
 #print(str(entities))
 # (4) !! Invoking a request manually !!
 result = client(GetHistoryRequest(
     entity,
-    limit=5000,
+    limit=50000,
     offset_date=None,
     offset_id=0,
     max_id=0,
@@ -45,9 +53,9 @@ messages = result.messages
 
 listuser= {}
 for m in messages:
-   # print(str(m))
+    #print(str(m))
     if type(m) is Message:
-       print('---------------')
+       #print('---------------')
        my_userexp    = client.get_entity(PeerUser(m.from_id))
        #my_userexp    = client.get_input_entity(PeerUser(m.from_id))
        if my_userexp.first_name:
@@ -63,9 +71,20 @@ for m in messages:
             username = my_userexp.last_name
        else:
             username =''
-       print("{} - {} - {}".format(prenom, nom,username ))
-       print(m.message)
+       #print("{} - {} - {}".format(prenom, nom,username ))
+       chaine = f"{m.id};{prenom};{m.message};"
+       ## recherche tag
+       re_tag = r'#(\w+)'
+       t_tag = re.findall(re_tag,m.message)
+       if t_tag:
+           tag = ";".join(t_tag)
+           chaine += tag
+           nchaine = re.sub(r'#(\w+)','',chaine)
+           nchaine1 = re.sub(r'\n','',nchaine)
+
+           print(nchaine1)
        listuser[prenom + ';' + nom +';' + username] = 1
+'''
 print('**************************')
 print(len(messages))
 print(len(listuser))
@@ -78,12 +97,13 @@ from telethon.tl.functions.messages import ImportChatInviteRequest
 #updates = client(ImportChatInviteRequest('FdFg1Eeb6JlTxdEecc_zEw'))
 #https://t.me/joinchat/FdFg1Eeb6JlTxdEecc_zEw
 #print(str(updates))
+'''
 exit()
 
 offset = 0
 limit = 200
 all_participants = []
-
+'''
 while True:
     participants = client.invoke(GetParticipantsRequest(
         channel, ChannelParticipantsSearch(''), offset, limit
@@ -93,3 +113,4 @@ while True:
     all_participants.extend(participants.users)
     offset += len(participants.users)
     # sleep(1)  # This line seems to be optional, no guarantees!
+'''
