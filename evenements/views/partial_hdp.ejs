@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title><%= title %></title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+<table class="table table-striped" >
+    <thead>
+    <tr>
+    <th>date </th>
+    <th> libelle</th>
+    <th>comité</th>
+    <th>type</th> 
+    <th>MAJ</th>    
+    </tr>
+    
+    </thead>
+    <tbody>
+    <% eves.forEach(function(eve) { %>    
+    <tr>
+    <td><%=  eve['dateevenement']%></td>
+    <td><%=  eve['libelle'] %></td>
+    <td><%=  eve['url'] %></td>
+    <td><form action="/maj" method="POST"><select name ="<%=eve['id_evenement']%>"  >
+        <option disabled selected value>-- select an option></option>
+        
+        <option value='D'>Distribution</option>
+        <option value='R'>Réunion</option>
+        <option value='F'>Formation</option>
+        <option value='A'>Atelier</option>
+        <option value='M'>Marche</option>
+        <option value='S'>Divers</option>
+        <option value='X'>N/A</option>
+    </select></td>
+    <td><input type="submit"></td>    
+    </tr>
+    <% }); %>
+    </tbody>
+    
+</table>
+    
+    
+</body>
+<script src="/js/vue.min.js"></script>   
+<head>
+<script src="/javascripts/jquery-3.3.1.min.js"></script>
+<script src="/javascripts/eg.js"></script>    
+</head>
+    
+    
+</html>
