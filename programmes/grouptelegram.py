@@ -3,9 +3,9 @@ import re
 #MessageService(out=False, mentioned=False, media_unread=False, silent=False, post=False, id=247, from_id=190483374, to_id=PeerChannel(channel_id=1227208803), reply_to_msg_id=None, date=datetime.utcfromtimestamp(1514887801), action=MessageActionChatJoinedByLink(inviter_id=324578789))
 
 # Use your own values here
-api_id = xxxxxxx
-api_hash = 'xxxxxxxxxxxxxx'
-phone_number = '+XXXXXXXXXXX'
+api_id = 156792
+api_hash = 'c67ae7fa9bbab7683277202b80abe02f'
+phone_number = '+33681454398'
 
 client = TelegramClient('postman', api_id, api_hash)
 client.connect()
