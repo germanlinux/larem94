@@ -37,10 +37,15 @@ with open(argv_comite94,"r") as f:
 for item in comites:
      item= item[0:-1]
      tabl = item.split(';')
-     nom = tabl[1]
-     url = helper_nom2url(nom)
+     nom = tabl[0]
+     #url = helper_nom2url(nom)
      #print(url)
-     chaine = "SELECT * from comites_10_2018 where url='{}'".format(url)
+     #chaine = "SELECT * from comites_09_2018 where url='{}'".format(nom)
+     #cur_sel.execute(chaine)
+     #if cur_sel.rowcount == 0:
+     #     print("{} : {} not found ".format(nom,url))
+     #else:
+     chaine = f"update comites_10_2018 set adherents = {tabl[2]}   where id_comite='{nom}'"
      cur_sel.execute(chaine)
-     if cur_sel.rowcount == 0:
-          print("{} : {} not found ".format(nom,url))
+     conn.commit()
+

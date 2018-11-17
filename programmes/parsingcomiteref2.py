@@ -44,3 +44,8 @@ for item in comites:
      cur_sel.execute(chaine)
      if cur_sel.rowcount == 0:
           print("{} : {} not found ".format(nom,url))
+     else:
+         chaine = f"update comites_10_2018 set adherents = {tabl[3]}   where url='{url}'"
+         cur_sel.execute(chaine)
+         conn.commit()
+
